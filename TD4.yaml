@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: API Customer
+  version: 1.0.0
+paths:
+  /customers/{customerId}:
+    put:
+      summary: Mise à jour complète d'un client
+      description: Met à jour toutes les propriétés d'un client existant.
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+          description: L'ID du client à mettre à jour.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                age:
+                  type: integer
+              required:
+                - id
+                - name
+                - age
+      responses:
+        '200':
+          description: Client mis à jour avec succès.
+        '404':
+          description: Client non trouvé.
+        '400':
+          description: Requête invalide.
+
+    patch:
+      summary: Mise à jour partielle d'un client
+      description: Met à jour certaines propriétés d'un client existant.
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+          description: L'ID du client à mettre à jour.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                age:
+                  type: integer
+      responses:
+        '200':
+          description: Client mis à jour avec succès.
+        '404':
+          description: Client non trouvé.
+        '400':
+          description: Requête invalide.
